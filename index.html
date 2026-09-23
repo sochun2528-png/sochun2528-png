@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ff5c85" />
+    <title>네컷 연구소</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="intro">
+        <p class="eyebrow">MAKE A MEMORY</p>
+        <h1>네컷 연구소 <span>✦</span></h1>
+        <p>찰칵, 네 번의 순간을 한 장의 추억으로.</p>
+      </header>
+
+      <section class="mode-panel" aria-label="사진 만들기 방식">
+        <button class="mode-button active" data-mode="camera" type="button">카메라로 촬영</button>
+        <button class="mode-button" data-mode="upload" type="button">사진 4장 올리기</button>
+      </section>
+
+      <section id="cameraSection" class="workspace">
+        <div class="camera-stage">
+          <video id="camera" autoplay playsinline muted aria-label="카메라 미리보기"></video>
+          <div id="cameraEmpty" class="camera-empty">카메라를 시작해 보세요<br /><small>권한을 허용하면 미리보기가 나타납니다.</small></div>
+          <div id="countdown" class="countdown hidden" aria-live="assertive">10</div>
+        </div>
+        <div class="camera-actions">
+          <button id="startCameraButton" class="button secondary" type="button">카메라 켜기</button>
+          <button id="shootButton" class="button primary" type="button" disabled>10초 간격으로 촬영 시작</button>
+        </div>
+        <p id="cameraStatus" class="status" aria-live="polite">카메라를 켜고 준비해 주세요.</p>
+      </section>
+
+      <section id="uploadSection" class="workspace hidden">
+        <label class="drop-zone" for="fileInput">
+          <span class="upload-icon">↑</span>
+          <strong>사진 4장을 선택하세요</strong>
+          <small>JPG, PNG, WEBP · 선택한 순서대로 배치됩니다</small>
+        </label>
+        <input id="fileInput" type="file" accept="image/*" multiple />
+        <p id="uploadStatus" class="status">사진을 4장 선택해 주세요.</p>
+      </section>
+
+      <section class="editor" aria-label="네컷 사진 편집기">
+        <div class="controls">
+          <div class="control-group">
+            <label for="frameColor">프레임 색상</label>
+            <div class="swatches" id="frameColor">
+              <button class="swatch selected" data-color="#ffffff" style="--swatch:#ffffff" aria-label="화이트" type="button"></button>
+              <button class="swatch" data-color="#191919" style="--swatch:#191919" aria-label="블랙" type="button"></button>
+              <button class="swatch" data-color="#ffbfd0" style="--swatch:#ffbfd0" aria-label="핑크" type="button"></button>
+              <button class="swatch" data-color="#bce8de" style="--swatch:#bce8de" aria-label="민트" type="button"></button>
+              <button class="swatch" data-color="#c9c4ff" style="--swatch:#c9c4ff" aria-label="라일락" type="button"></button>
+            </div>
+          </div>
+          <label class="caption-control" for="caption">문구
+            <input id="caption" maxlength="28" placeholder="오늘의 네컷" value="오늘의 네컷" />
+          </label>
+        </div>
+
+        <div class="result-layout">
+          <div class="photo-strip-wrap">
+            <canvas id="photoStrip" width="900" height="2100" aria-label="완성된 네컷 사진"></canvas>
+          </div>
+          <div class="result-actions">
+            <button id="downloadButton" class="button primary" type="button" disabled>PNG로 저장하기</button>
+            <button id="resetButton" class="text-button" type="button">처음부터 다시 만들기</button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
